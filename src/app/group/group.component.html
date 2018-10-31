@@ -1,29 +1,29 @@
 <h3 class="text-center m-3">Création aléatoire de groupes</h3>
-<div class="row justify-content-center">
-  <div class="container p-2">
+<div class="row justify-content-around">
     <form #f="ngForm" class="form-inline">
 
       <div class="input-group-prepend shadow-sm">
-        <label class="input-group-text" for="promo">Selectionnez une promo :</label>
+        <label class="input-group-text" for="selectPromo">Selectionnez une promo :</label>
       </div>
-      <select class="custom-select shadow-sm" id="promo" name="promo" #name="ngModel" [(ngModel)]="promo">
+      <select class="custom-select shadow-sm" id="selectPromo" name="promo" #name="ngModel" [(ngModel)]="promo" (change)="mixteAndAttributGroups(promo, studientsPerGroup)">
         <option selected>Promo...</option>
         <option *ngFor="let promo of promos" [ngValue]="promo.id">{{ promo.name }}</option>
       </select>
 
       <div class="form-group pl-3">
-        <label class="input-group-text" for="studientsPerGroup">Nombre d'étudiants par groupe :</label>
+        <label class="input-group-text shadow-sm" for="studientsPerGroup">Nombre d'étudiants par groupe :</label>
         <input type="number" name="studientsPerGroup" class="form-control shadow-sm" id="studientsPerGroup" #name="ngModel"
           [(ngModel)]="studientsPerGroup" minlength="1" min=2 max=30 required>
       </div>
 
-      <div class="">
+      <div>
         <button type="submit" class="btn btn-success" (click)="mixteAndAttributGroups(promo, studientsPerGroup)"
           [disabled]="!f.valid">Valider</button>
       </div>
     </form>
-  </div>
+</div>
   
+<div class="row justify-content-center mt-3">
   <div *ngIf="name.invalid && (name.dirty || name.touched)" class=" alert alert-danger">
 
     <div *ngIf="name.errors.required">
@@ -36,9 +36,10 @@
   <div *ngIf="promoXMixed.length == 0 && promo.id !=0" class="m-3">
       <span class="alert alert-danger">Aucun étudiant dans cette promo</span>
     </div>
+</div>
   
 
-
+<div class="row justify-content-center">
   <div class="col-6 mt-3">
     <div class="row m-2" *ngIf="promoXMixed.length >= 1">
       <div class="col-12">
@@ -55,7 +56,6 @@
               <th scope="row">{{ studient.id }}</th>
               <td>{{ studient.name }}</td>
               <td *ngIf="studient.group; else elseTemplate">{{ studient.group }}</td>
-
               <ng-template #elseTemplate>
                 Na
               </ng-template>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CampusService } from '../services/campus.service';
 import { Studient } from '../Models/studient';
 import { Subscription } from 'rxjs';

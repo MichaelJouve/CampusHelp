@@ -27,6 +27,7 @@ export class GroupComponent implements OnInit {
       }
     );
     this.campusService.emitPromosubject();
+
   }
 
 

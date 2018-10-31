@@ -9,13 +9,17 @@ import { GroupComponent } from './group/group.component';
 import { MenuComponent } from './menu/menu.component';
 import { CampusService } from './services/campus.service';
 import { HomeComponent } from './home/home.component';
+import { StudientComponent } from './studient/studient.component';
+import { StudientsTabComponent } from './ca-components/studients-tab/studients-tab.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GroupComponent,
     MenuComponent,
-    HomeComponent
+    HomeComponent,
+    StudientComponent,
+    StudientsTabComponent
   ],
   imports: [
     BrowserModule,

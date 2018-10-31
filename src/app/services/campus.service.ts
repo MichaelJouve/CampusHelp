@@ -86,7 +86,8 @@ export class CampusService implements OnDestroy {
 
 
   addPromotion(name:String, startyear:Date) {
-    let newPromo = new Promotion(name, startyear);
+    let newPromoId = this.promotions.length +1;
+    let newPromo = new Promotion(name, startyear, newPromoId);
     this.promotions.push(newPromo);
 
     this.emitPromosubject(); // emit the changes
