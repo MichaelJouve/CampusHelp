@@ -1,0 +1,68 @@
+<h3 class="text-center m-3">Création aléatoire de groupes</h3>
+<div class="row justify-content-center">
+  <div class="container p-2">
+    <form #f="ngForm" class="form-inline">
+
+      <div class="input-group-prepend shadow-sm">
+        <label class="input-group-text" for="promo">Selectionnez une promo :</label>
+      </div>
+      <select class="custom-select shadow-sm" id="promo" name="promo" #name="ngModel" [(ngModel)]="promo">
+        <option selected>Promo...</option>
+        <option *ngFor="let promo of promos" [ngValue]="promo.id">{{ promo.name }}</option>
+      </select>
+
+      <div class="form-group pl-3">
+        <label class="input-group-text" for="studientsPerGroup">Nombre d'étudiants par groupe :</label>
+        <input type="number" name="studientsPerGroup" class="form-control shadow-sm" id="studientsPerGroup" #name="ngModel"
+          [(ngModel)]="studientsPerGroup" minlength="1" min=2 max=30 required>
+      </div>
+
+      <div class="">
+        <button type="submit" class="btn btn-success" (click)="mixteAndAttributGroups(promo, studientsPerGroup)"
+          [disabled]="!f.valid">Valider</button>
+      </div>
+    </form>
+  </div>
+  
+  <div *ngIf="name.invalid && (name.dirty || name.touched)" class=" alert alert-danger">
+
+    <div *ngIf="name.errors.required">
+      Champs obligatoire.
+    </div>
+    <div *ngIf="name.errors.minlength">
+      Minimum un chiffre.
+    </div>
+  </div>
+  <div *ngIf="promoXMixed.length == 0 && promo.id !=0" class="m-3">
+      <span class="alert alert-danger">Aucun étudiant dans cette promo</span>
+    </div>
+  
+
+
+  <div class="col-6 mt-3">
+    <div class="row m-2" *ngIf="promoXMixed.length >= 1">
+      <div class="col-12">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nom</th>
+              <th scope="col">Groupe</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let studient of promoXMixed">
+              <th scope="row">{{ studient.id }}</th>
+              <td>{{ studient.name }}</td>
+              <td *ngIf="studient.group; else elseTemplate">{{ studient.group }}</td>
+
+              <ng-template #elseTemplate>
+                Na
+              </ng-template>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
