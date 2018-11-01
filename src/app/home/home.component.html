@@ -72,7 +72,7 @@
         </div>
 
         <button type="submit" class="btn btn-success" (click)="addPromo(promoName, startyear)" [disabled]="!f.valid">Valider</button>
-        <button type="reset" class="btn btn-danger ml-2" (click)="displayPromoForm=false">Annuler</button>
+        <button type="reset" class="btn btn-danger ml-2" (click)="displayPromoForm=false">Fermer</button>
       </form>
     </div>
 
@@ -100,7 +100,7 @@
             </div>
           </div>
           <button type="submit" class="btn btn-success" (click)="addStudient(f.value, studientName, group)" [disabled]="studientForm.invalid && !promo ">Valider</button>
-          <button type="reset" class="btn btn-danger ml-2" (click)="displayPromoForm=false">Annuler</button>
+          <button type="reset" class="btn btn-danger ml-2" (click)="displayPromoForm=false">Fermer</button>
         </form>
       </div>
 

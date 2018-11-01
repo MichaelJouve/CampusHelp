@@ -12,8 +12,8 @@ import { Subscription } from 'rxjs';
 export class StudientsTabComponent implements OnInit {
 
   promoXMixed = new Array<Studient>();
-  promos:Promotion[];
-  promoSubscription:Subscription;
+  promos: Promotion[];
+  promoSubscription: Subscription;
 
   constructor(private campusService: CampusService) { }
 

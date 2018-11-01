@@ -12,57 +12,57 @@ export class CampusService implements OnDestroy {
   studients: Studient[] = [
     {
       id: 1,
-      name: "Damien Dubois",
+      name: 'Damien Dubois',
       group: 1,
       promo: 1
     },
     {
       id: 2,
-      name: "Nicolas",
+      name: 'Nicolas',
       promo: 1
     },
     {
       id: 3,
-      name: "Michaël",
+      name: 'Michaël',
       promo: 1
     },
     {
       id: 4,
-      name: "Roger",
+      name: 'Roger',
       promo: 1
     },
     {
       id: 5,
-      name: "Georgette",
+      name: 'Georgette',
       group: 1,
       promo: 1
     },
     {
       id: 6,
-      name: "Promo 3",
+      name: 'Promo 3',
       promo: 3
     }
-  ]
+  ];
 
   private promotions: Promotion[] = [
     {
       id: 1,
-      name: "1ère Valence",
-      city: "Valence",
+      name: '1ère Valence',
+      city: 'Valence',
     },
     {
       id: 2,
-      name: "2eme Valence",
-      city: "Valence"
+      name: '2eme Valence',
+      city: 'Valence'
     },
     {
       id: 3,
-      name: "3eme Valence",
+      name: '3eme Valence',
     }
-  ]
+  ];
 
   promoSubject = new Subject<Promotion[]>();
-  studientsubject= new Subject<Studient[]>();
+  studientsubject = new Subject<Studient[]>();
 
   constructor() {
   }
@@ -70,7 +70,7 @@ export class CampusService implements OnDestroy {
   emitPromosubject() {
     this.promoSubject.next(this.promotions.slice());
   }
-  emitStudientsubject(){
+  emitStudientsubject() {
     this.studientsubject.next(this.studients.slice());
   }
 
@@ -85,18 +85,18 @@ export class CampusService implements OnDestroy {
   }
 
 
-  addPromotion(name:String, startyear:Date) {
-    let newPromoId = this.promotions.length +1;
-    let newPromo = new Promotion(name, startyear, newPromoId);
+  addPromotion(name: String, startyear: Date) {
+    const newPromoId = this.promotions.length + 1;
+    const newPromo = new Promotion(name, startyear, newPromoId);
     this.promotions.push(newPromo);
 
     this.emitPromosubject(); // emit the changes
   }
 
 
-  addStudient(promo:number, studientName:String, group?:number){
-    let studientID = this.studients.length +1;
-    let newStudient = new Studient(studientID, studientName, promo, group);
+  addStudient(promo: number, studientName: String, group?: number) {
+    const studientID = this.studients.length + 1;
+    const newStudient = new Studient(studientID, studientName, promo, group);
     this.studients.push(newStudient);
 
     this.emitStudientsubject();
@@ -104,7 +104,7 @@ export class CampusService implements OnDestroy {
 
 
   ngOnDestroy(): void {
-    this.promoSubject.unsubscribe;
-    this.studientsubject.unsubscribe;
+    this.promoSubject.unsubscribe();
+    this.studientsubject.unsubscribe();
   }
 }
