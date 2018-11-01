@@ -8,8 +8,8 @@ import { Subject } from 'rxjs';
 })
 export class CampusService implements OnDestroy {
 
-  fullPromo = new Array<Studient>();
-  studients: Studient[] = [
+  private fullPromo = new Array<Studient>();
+  private studients: Studient[] = [
     {
       id: 1,
       name: 'Damien Dubois',
@@ -43,7 +43,6 @@ export class CampusService implements OnDestroy {
       promo: 3
     }
   ];
-
   private promotions: Promotion[] = [
     {
       id: 1,

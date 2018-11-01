@@ -1,6 +1,5 @@
-<div class="row justify-content-center">
-    <div class="col-6 mt-3">
-      <div class="row m-2" *ngIf="promoXMixed.length >= 1">
+<div class="justify-content-center m-3">
+      <div class="row" *ngIf="studientsData.length >= 1">
         <div class="col-12">
           <table class="table table-striped">
             <thead>
@@ -11,17 +10,16 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let studient of promoXMixed">
+              <tr *ngFor="let studient of studientsData">
                 <th scope="row">{{ studient.id }}</th>
                 <td>{{ studient.name }}</td>
                 <td *ngIf="studient.group; else elseTemplate">{{ studient.group }}</td>
                 <ng-template #elseTemplate>
-                  Na
+                  -
                 </ng-template>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-    </div>
   </div>

@@ -3,51 +3,35 @@
 <div class="container">
   <div class="row">
     <div class="col-10">
-        <form #f="ngForm">
-      <div class="input-group mb-3">
-        <div class="input-group-prepend shadow-sm">
-          <label class="input-group-text" for="selectPromo">Selectionnez une promo :</label>
+      <form #f="ngForm">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend shadow-sm">
+            <label class="input-group-text" for="selectPromo">Selectionnez une promo :</label>
+          </div>
+          <select class="custom-select" id="selectPromo" name="promo" (change)="selectPromo(value)" [(ngModel)]="value">
+            <option selected>Promo...</option>
+            <option *ngFor="let promo of promos" [ngValue]="promo.id">{{ promo.name }}</option>
+          </select>
+
+          <button type="button" class="btn btn-smal btn-success ml-2" (click)="openNewPromoForm()">Ajouter une promo</button>
+          <button type="button" class="btn btn-smal btn-success ml-2" (click)="openNewStudientForm()">Ajouter un
+            étudiant</button>
         </div>
-        <select class="custom-select" id="selectPromo" name="promo" (change)="selectPromo(value)" [(ngModel)]="value">
-          <option selected>Promo...</option>
-          <option *ngFor="let promo of promos" [ngValue]="promo.id">{{ promo.name }}</option>
-        </select>
-      
-        <button type="button" class="btn btn-smal btn-success ml-2" (click)="openNewPromoForm()">Ajouter une promo</button>
-        <button type="button" class="btn btn-smal btn-success ml-2" (click)="openNewStudientForm()">Ajouter un étudiant</button>
-      </div>
-    </form>
+      </form>
     </div>
   </div>
 
-  <div class="row" >
-    <div class="row m-2" *ngIf="selectedPromo.length > 0">
-      <div class="col-12">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Nom</th>
-              <th scope="col">Groupe</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let studient of selectedPromo">
-              <th scope="row">{{ studient.id }}</th>
-              <td>{{ studient.name }}</td>
-              <td>{{ studient.group }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div *ngIf=" 1 > selectedPromo.length" class="row m-3">
+  <div class="row">
+
+    <!--Promo selected Tab binded with @Input studientsData -->
+    <app-studients-tab [studientsData]="studientsData"></app-studients-tab>
+
+    <div *ngIf=" 1 > studientsData.length" class="row m-3">
       <span class="alert alert-danger">Aucun étudiant dans cette promo</span>
     </div>
 
-
-
     <div class="col-6" *ngIf="displayPromoForm">
+        <h4 class="">Ajout promotion</h4>
       <form #f="ngForm">
         <div class="form-group">
           <label for="promoName">Nom</label>
@@ -72,37 +56,38 @@
         </div>
 
         <button type="submit" class="btn btn-success" (click)="addPromo(promoName, startyear)" [disabled]="!f.valid">Valider</button>
-        <button type="reset" class="btn btn-danger ml-2" (click)="displayPromoForm=false">Fermer</button>
+        <button type="reset" class="btn btn-danger ml-2" (click)="displayPromoForm = false">Fermer</button>
       </form>
     </div>
 
     <div class="col-6" *ngIf="displayStudientForm">
-        <form #studientForm="ngForm">
-          <div class="form-group">
-            <label for="studientName">Nom prénom</label>
-            <input type="text" name="name" class="form-control shadow-sm" name="studientName" #name="ngModel" [(ngModel)]="studientName"
-              minlength="4" required>
+      <h4 class="">Ajout étudient</h4>
+      <form #studientForm="ngForm">
+        <div class="form-group">
+          <label for="studientName">Nom prénom</label>
+          <input type="text" name="name" class="form-control shadow-sm" name="studientName" #name="ngModel" [(ngModel)]="studientName"
+            minlength="4" required>
+        </div>
+
+        <div class="form-group">
+          <label for="group">Groupe (optionnel)</label>
+          <input type="number" name="group" class="form-control shadow-sm" id="group" #name="ngModel" [(ngModel)]="group"
+            minlength="1" min=1>
+        </div>
+
+        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+
+          <div *ngIf="name.errors.required">
+            Veillez entrerun nom.
           </div>
-  
-          <div class="form-group">
-            <label for="group">Groupe (optionnel)</label>
-            <input type="number" name="group" class="form-control shadow-sm" id="group" #name="ngModel" [(ngModel)]="group"
-              minlength="1" min=1>
+          <div *ngIf="name.errors.minlength">
+            Minimum quatre caratères.
           </div>
-  
-          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
-  
-            <div *ngIf="name.errors.required">
-              Veillez entrerun nom.
-            </div>
-            <div *ngIf="name.errors.minlength">
-              Minimum quatre caratères.
-            </div>
-          </div>
-          <button type="submit" class="btn btn-success" (click)="addStudient(f.value, studientName, group)" [disabled]="studientForm.invalid && !promo ">Valider</button>
-          <button type="reset" class="btn btn-danger ml-2" (click)="displayPromoForm=false">Fermer</button>
-        </form>
-      </div>
+        </div>
+        <button type="submit" class="btn btn-success" (click)="addStudient(f.value, studientName, group)" [disabled]="studientForm.invalid && !promo ">Valider</button>
+        <button type="reset" class="btn btn-danger ml-2" (click)="displayStudientForm=false">Fermer</button>
+      </form>
+    </div>
 
 
   </div>

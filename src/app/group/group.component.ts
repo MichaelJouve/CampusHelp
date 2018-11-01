@@ -13,9 +13,9 @@ export class GroupComponent implements OnInit {
 
   @Input() promo = 0;
   @Input() studientsPerGroup: number;
-  promoXMixed = new Array<Studient>();
-  promos:Promotion[];
-  promoSubscription:Subscription;
+  studientsData = new Array<Studient>();
+  promos: Promotion[];
+  promoSubscription: Subscription;
 
 
   constructor(private campusService: CampusService) { }
@@ -31,28 +31,27 @@ export class GroupComponent implements OnInit {
   }
 
 
-  private mixteAndAttributGroups(promo:number, studientsPerGroup:number) {
-    this.promoXMixed = this.attributGroup(this.MixtPromo(+promo), studientsPerGroup);
+  private mixteAndAttributGroups(promo: number, studientsPerGroup: number) {
+    this.studientsData = this.attributGroup(this.MixtPromo(+promo), studientsPerGroup);
   }
 
-  
   // Mixt the Studient[] and return it.
-  private MixtPromo(promotion:number) {
-    let promoX = this.campusService.filterPromo(promotion);
-    this.promoXMixed = [];
+  private MixtPromo(promotionId: number) {
+    const promoX = this.campusService.filterPromo(promotionId);
+    this.studientsData = [];
 
     while (promoX.length > 0) {
       const randomChoiceIndex = (Math.random() * promoX.length - 1);
-      this.promoXMixed.push(promoX.splice(randomChoiceIndex, 1)[0])
+      this.studientsData.push(promoX.splice(randomChoiceIndex, 1)[0]);
     }
-    return this.promoXMixed;
+    return this.studientsData;
   }
 
 
   /**
   * Give a group to every studients in the promotion.
-  * @param promotion 
-  * @param studientsPerGroup 
+  *  promotion
+  *  studientsPerGroup
   */
   private attributGroup(promotion: Studient[], studientsPerGroup): Studient[] {
     let i = 0;

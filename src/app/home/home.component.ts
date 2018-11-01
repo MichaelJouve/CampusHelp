@@ -11,11 +11,11 @@ import { Promotion } from '../Models/promotion';
 })
 export class HomeComponent implements OnInit {
 
-  selectedpromoID:number;
+  selectedpromoID: number;
   promos: Promotion[];
   promoSubscription: Subscription;
   studientSubscription: Subscription;
-  selectedPromo = new Array<Studient>();
+  studientsData = new Array<Studient>();
   selectedPromoSubscription: Subscription;
 
 
@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
     );
 
 this.selectedPromoSubscription = this.campusService.studientsubject.subscribe(
-  (studients) => { this.selectedPromo = this.campusService.filterPromo(+this.selectedpromoID);
+  (studients) => { this.studientsData = this.campusService.filterPromo(+this.selectedpromoID);
   });
 
 
@@ -40,19 +40,19 @@ this.selectedPromoSubscription = this.campusService.studientsubject.subscribe(
     this.campusService.emitStudientsubject();
   }
 
-  // select a promo to display
+  // Select a promo to display
   selectPromo(selectedpromoID: number) {
-    this.selectedpromoID = selectedpromoID; //update last selected promo
-    this.selectedPromo = this.campusService.filterPromo(+selectedpromoID);
+    this.selectedpromoID = selectedpromoID; // update last selected promo
+    this.studientsData = this.campusService.filterPromo(+selectedpromoID);
   }
 
-  // change parameter to display new promotion form
+  // Display new promotion form
   openNewPromoForm() {
     this.displayStudientForm = false;
     this.displayPromoForm = true;
   }
 
-  // change parameter to display new studient form
+  // Display new studient form
   openNewStudientForm() {
     this.displayPromoForm = false;
     this.displayStudientForm = true;
@@ -68,8 +68,8 @@ this.selectedPromoSubscription = this.campusService.studientsubject.subscribe(
     }
   }
 
-  addStudient(promo, studientName:String, group?: number) {
-    console.log(studientName);
+  // Add new studient
+  addStudient(promo, studientName: String, group?: number) {
     try {
       this.campusService.addStudient(promo.promo, studientName, group);
       this.displayPromoForm = false;

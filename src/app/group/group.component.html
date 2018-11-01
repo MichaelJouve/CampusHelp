@@ -33,36 +33,10 @@
       Minimum un chiffre.
     </div>
   </div>
-  <div *ngIf="promoXMixed.length == 0 && promo.id !=0" class="m-3">
+  <div *ngIf="studientsData.length == 0 && promo.id !=0" class="m-3">
       <span class="alert alert-danger">Aucun étudiant dans cette promo</span>
     </div>
 </div>
   
-
-<div class="row justify-content-center">
-  <div class="col-6 mt-3">
-    <div class="row m-2" *ngIf="promoXMixed.length >= 1">
-      <div class="col-12">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Nom</th>
-              <th scope="col">Groupe</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let studient of promoXMixed">
-              <th scope="row">{{ studient.id }}</th>
-              <td>{{ studient.name }}</td>
-              <td *ngIf="studient.group; else elseTemplate">{{ studient.group }}</td>
-              <ng-template #elseTemplate>
-                Na
-              </ng-template>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
+  <!--Promo selected Tab binded with @Input studientsData -->
+  <app-studients-tab [studientsData]="studientsData"></app-studients-tab>
