@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +11,9 @@ import { CampusService } from './services/campus.service';
 import { HomeComponent } from './home/home.component';
 import { StudientComponent } from './studient/studient.component';
 import { StudientsTabComponent } from './ca-components/studients-tab/studients-tab.component';
+import { TaskComponent } from './task/task.component';
+import { TasksViewComponent } from './tasks-view/tasks-view.component';
+import { TaskService } from './services/task.service';
 
 @NgModule({
   declarations: [
@@ -19,16 +22,17 @@ import { StudientsTabComponent } from './ca-components/studients-tab/studients-t
     MenuComponent,
     HomeComponent,
     StudientComponent,
-    StudientsTabComponent
+    StudientsTabComponent,
+    TaskComponent,
+    TasksViewComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule
-    
   ],
-  providers: [CampusService],
+  providers: [CampusService, TaskService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

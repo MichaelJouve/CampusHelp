@@ -10,7 +10,7 @@
         <option *ngFor="let promo of promos" [ngValue]="promo.id">{{ promo.name }}</option>
       </select>
 
-      <div class="form-group pl-3">
+      <div class="form-group pl-3 pr-3">
         <label class="input-group-text shadow-sm" for="studientsPerGroup">Nombre d'étudiants par groupe :</label>
         <input type="number" name="studientsPerGroup" class="form-control shadow-sm" id="studientsPerGroup" #name="ngModel"
           [(ngModel)]="studientsPerGroup" minlength="1" min=2 max=30 required>

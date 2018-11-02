@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Studient } from '../../Models/studient';
 
 @Component({
@@ -8,8 +8,13 @@ import { Studient } from '../../Models/studient';
 })
 export class StudientsTabComponent {
 
-@Input() studientsData: Studient[];
+  @Input() studientsData: Studient[];
+  @Output() deleteStud = new EventEmitter();
 
   constructor() { }
+
+  deleteStudient(studientId) {
+    this.deleteStud.emit(studientId);
+  }
 
 }

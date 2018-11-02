@@ -101,6 +101,9 @@ export class CampusService implements OnDestroy {
     this.emitStudientsubject();
   }
 
+  deleteStudient(studientID) {
+    this.studients.splice(this.studients.findIndex(studient => studient.id === studientID), 1);
+  }
 
   ngOnDestroy(): void {
     this.promoSubject.unsubscribe();

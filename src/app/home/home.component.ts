@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit {
   studientsData = new Array<Studient>();
   selectedPromoSubscription: Subscription;
 
-
   displayPromoForm = false;
   displayStudientForm = false;
 
@@ -78,5 +77,12 @@ this.selectedPromoSubscription = this.campusService.studientsubject.subscribe(
     }
   }
 
-}
+    // Delete one studient on the main list
+  deleteStudient(studientId) {
+    this.campusService.deleteStudient(studientId);
 
+    // update studients list
+    this.campusService.emitStudientsubject();
+  }
+
+}
