@@ -1,0 +1,53 @@
+<div class=row>
+    <div class=col-4>
+        <h4 class="font-weight-light text-center m-2 text-warning">A faire</h4>
+        <div class="list-group">
+            <cdk-drop-list #toDoList="cdkDropList" [cdkDropListData]="tasksToDo" [cdkDropListConnectedTo]="[doneList, inProgressList]"
+                (cdkDropListDropped)="onDrop($event)" cdkDropList>
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let task of tasksToDo"
+                    cdkDrag>
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ task.title }}</h5>
+                        <small>{{ task.startDate }}</small>
+                    </div>
+                    <p class="mb-1">{{ task.content }}</p>
+                    <small>{{task.inCharge}}</small>
+                </a>
+            </cdk-drop-list>
+        </div>
+    </div>
+    <div class=col-4>
+        <h4 class="font-weight-light text-center m-2 text-info">En cours</h4>
+        <div class="list-group">
+            <cdk-drop-list #inProgressList="cdkDropList" [cdkDropListData]="tasksInProgress" [cdkDropListConnectedTo]="[doneList, toDoList]"
+                (cdkDropListDropped)="onDrop($event)" cdkDropList>
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let task of tasksInProgress"
+                    cdkDrag>
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ task.title }}</h5>
+                        <small>{{ task.startDate }}</small>
+                    </div>
+                    <p class="mb-1">{{ task.content }}</p>
+                    <small>{{task.inCharge}}</small>
+                </a>
+            </cdk-drop-list>
+        </div>
+    </div>
+    <div class=col-4>
+        <h4 class="font-weight-light text-center m-2 text-success">Terminé</h4>
+        <div class="list-group">
+            <cdk-drop-list #doneList="cdkDropList" [cdkDropListData]="tasksDone" [cdkDropListConnectedTo]="[inProgressList, toDoList]"
+                (cdkDropListDropped)="onDrop($event)" cdkDropList>
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let task of tasksDone"
+                    cdkDrag>
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ task.title }}</h5>
+                        <small>{{ task.startDate }}</small>
+                    </div>
+                    <p class="mb-1">{{ task.content }}</p>
+                    <small>{{task.inCharge}}</small>
+                </a>
+            </cdk-drop-list>
+        </div>
+    </div>
+</div>

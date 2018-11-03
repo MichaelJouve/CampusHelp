@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Tasks } from '../../Models/tasks';
 
 @Component({
   selector: 'app-task',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./task.component.sass']
 })
 export class TaskComponent implements OnInit {
+
+  @Input() tasksData: Tasks[];
 
   constructor() { }
 

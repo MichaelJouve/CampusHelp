@@ -5,7 +5,7 @@ export class Studient {
     public promo: number;
     public group?: number;
 
-   
+
      // Param group is optional
     constructor(id: number, name: String, promo: number, group?: number) {
         this.name = name;
